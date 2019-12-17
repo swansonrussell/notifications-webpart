@@ -1,6 +1,27 @@
 @import '~office-ui-fabric-react/dist/sass/References.scss';
 
 .messages {
+
+  .info {
+    background-color: blue;
+  }
+
+  .notice {
+    background-color: brown;
+  }
+
+  .error {
+    background-color: red;
+  }
+
+  .ok {
+    background-color: green;
+  }
+
+  .warning {
+    background-color: yellow;
+  }
+
   .container {
     max-width: 700px;
     margin: 0px auto;
