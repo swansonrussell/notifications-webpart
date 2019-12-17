@@ -1,0 +1,13 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "notifications-webpart-client-side-solution",
+    "id": "a8d1917a-e058-493e-bf01-f9ce8a37cd55",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "isDomainIsolated": false
+  },
+  "paths": {
+    "zippedPackage": "solution/notifications-webpart.sppkg"
+  }
+}
