@@ -12,6 +12,7 @@ import Messages from './components/Messages';
 import { IMessagesProps } from './components/IMessagesProps';
 
 export interface IMessagesWebPartProps {
+  text: string;
   description: string;
 }
 
@@ -21,7 +22,12 @@ export default class MessagesWebPart extends BaseClientSideWebPart<IMessagesWebP
     const element: React.ReactElement<IMessagesProps > = React.createElement(
       Messages,
       {
-        description: this.properties.description
+        description: this.properties.description,
+        displayMode: this.displayMode,
+        text: this.properties.text,
+        updateProperty: (value: string) => {
+          this.properties.text = value;
+        }
       }
     );
 

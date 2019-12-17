@@ -2,6 +2,7 @@ import * as React from 'react';
 import styles from './Messages.module.scss';
 import { IMessagesProps } from './IMessagesProps';
 import { escape } from '@microsoft/sp-lodash-subset';
+import { DisplayMode } from '@microsoft/sp-core-library';
 
 
 const notifications = [
@@ -20,33 +21,38 @@ export default class Messages extends React.Component<IMessagesProps, { value: s
     super(props);
     this.state = { value: "" };
 
-    this.handleChange = this.handleChange.bind(this);
+    this._onChange = this._onChange.bind(this);
+    this._onTextChange = this._onTextChange.bind(this);
   }
 
-  handleChange(event) {
+  private _onChange(event) {
+    // this.props.updateProperty(event.target.value);
     this.setState({value: event.target.value});
+  }
+
+  private _onTextChange(event) {
+    this.props.updateProperty(event.target.value);
   }
 
   public render(): React.ReactElement<IMessagesProps> {
     return (
       <div className={ styles.messages }>
         <div className={ styles.container }>
-          <select value={ this.state.value } onChange={ this.handleChange }>{selectOptions}</select>
+          <select value={ this.state.value } onChange={ this._onChange }>{selectOptions}</select>
           <div>
-            <textarea className={ styles[this.state.value] }>
+            {
+              this.props.displayMode === DisplayMode.Edit && (
+                <textarea className={ styles[this.state.value] } onChange={ this._onTextChange } value={ this.props.text }>
+                </textarea>
+              )
+            }
 
-            </textarea>
-          </div>
-
-          <div className={ styles[this.state.value] }>
-            <div className={ styles.column }>
-              <span className={ styles.title }>Welcome to SharePoint!</span>
-              <p className={ styles.subTitle }>Customize SharePoint experiences using Web Parts.</p>
-              <p className={ styles.description }>{escape(this.props.description)}</p>
-              <a href="https://aka.ms/spfx" className={ styles.button }>
-                <span className={ styles.label }>Learn more</span>
-              </a>
-            </div>
+            {
+              this.props.displayMode !== DisplayMode.Edit && (
+                <span>{this.props.text}</span>
+              )
+            }
+            
           </div>
         </div>
       </div>
