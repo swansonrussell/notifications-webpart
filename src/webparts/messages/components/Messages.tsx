@@ -29,7 +29,7 @@ export default class Messages extends React.Component<IMessagesProps, { value: s
 
   private _onChange(event) {
     this.setState({ value: event.target.value });
-    let element = notifications.find(element => element.value === event.target.value); //Had to update tsconfig from es5 to es6 to allow Array.prototype.find. Need to change it back to work on IE11. Adapt global Array type.
+    let element = notifications.find(element => element.value === event.target.value); //Had to update tsconfig from es5 to es6 to allow Array.prototype.find. Need to change it back to work on IE11. Adapt global Array type polyfill.
     this.setState({ title: element.title });
     console.log(event.target);
   }
