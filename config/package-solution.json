@@ -4,8 +4,7 @@
     "name": "notifications-webpart-client-side-solution",
     "id": "a8d1917a-e058-493e-bf01-f9ce8a37cd55",
     "version": "1.0.0.0",
-    "includeClientSideAssets": true,
-    "isDomainIsolated": false
+    "includeClientSideAssets": false
   },
   "paths": {
     "zippedPackage": "solution/notifications-webpart.sppkg"

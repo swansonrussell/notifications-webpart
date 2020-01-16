@@ -16,12 +16,12 @@
 
   "preconfiguredEntries": [{
     "groupId": "5c03119e-3074-46fd-976b-c60198311f70", // Other
-    "group": { "default": "Other" },
-    "title": { "default": "Messages" },
+    "group": { "default": "SR Web Parts" },
+    "title": { "default": "Message Bar" },
     "description": { "default": "Create messages and notifications!" },
-    "officeFabricIconFontName": "Page",
+    "officeFabricIconFontName": "Info",
     "properties": {
-      "description": "Messages"
+      "description": "Message Bar"
     }
   }]
 }

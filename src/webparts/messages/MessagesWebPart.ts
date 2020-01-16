@@ -1,11 +1,18 @@
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
-import {
-  BaseClientSideWebPart,
+import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
+import { 
   IPropertyPaneConfiguration,
-  PropertyPaneTextField
-} from '@microsoft/sp-webpart-base';
+  PropertyPaneTextField,
+  PropertyPaneCheckbox,
+  PropertyPaneLabel,
+  PropertyPaneLink,
+  PropertyPaneSlider,
+  PropertyPaneToggle,
+  PropertyPaneDropdown,
+  PropertyPaneHorizontalRule
+ } from '@microsoft/sp-property-pane';
 
 import * as strings from 'MessagesWebPartStrings';
 import Messages from './components/Messages';
@@ -14,20 +21,25 @@ import { IMessagesProps } from './components/IMessagesProps';
 export interface IMessagesWebPartProps {
   text: string;
   description: string;
+  type: string;
+  headline: string;
+  link: string;
+  hasLink: boolean;
+  url: string;
 }
 
 export default class MessagesWebPart extends BaseClientSideWebPart<IMessagesWebPartProps> {
-
+  
   public render(): void {
     const element: React.ReactElement<IMessagesProps > = React.createElement(
       Messages,
       {
-        description: this.properties.description,
-        displayMode: this.displayMode,
         text: this.properties.text,
-        updateProperty: (value: string) => {
-          this.properties.text = value;
-        }
+        type: this.properties.type,
+        headline: this.properties.headline,
+        link: this.properties.link,
+        hasLink: this.properties.hasLink,
+        url: this.properties.url
       }
     );
 
@@ -51,10 +63,39 @@ export default class MessagesWebPart extends BaseClientSideWebPart<IMessagesWebP
           },
           groups: [
             {
-              groupName: strings.BasicGroupName,
+              groupName: 'Message Bar',
               groupFields: [
-                PropertyPaneTextField('description', {
-                  label: strings.DescriptionFieldLabel
+                PropertyPaneDropdown('type', {
+                  label: 'Message Type',
+                  options: [
+                    { key: 'info', text: 'Info' },
+                    { key: 'error', text: 'Error' },
+                    { key: 'blocked', text: 'Blocked' },
+                    { key: 'severeWarning', text: 'Severe Warning' },
+                    { key: 'success', text: 'Success' },
+                    { key: 'warning', text: 'Warning' }
+                  ]
+                }),
+                PropertyPaneTextField('headline', {
+                  label: 'Headline'
+                }),
+                PropertyPaneTextField('text', {
+                  label: 'Message Text',
+                  multiline: true
+                }),
+                PropertyPaneHorizontalRule(),
+                PropertyPaneToggle('hasLink', {
+                  label: 'Hyperlink (Optional)',
+                  onText: 'Display a link',
+                  offText: 'Do not display a link'
+                }),
+                PropertyPaneTextField('link', {
+                  label: 'Link Text',
+                  disabled: !this.properties.hasLink
+                }),
+                PropertyPaneTextField('url', {
+                  label: 'Link URL',
+                  disabled: !this.properties.hasLink
                 })
               ]
             }
