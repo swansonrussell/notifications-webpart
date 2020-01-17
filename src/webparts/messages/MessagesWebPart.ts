@@ -26,6 +26,7 @@ export interface IMessagesWebPartProps {
   link: string;
   hasLink: boolean;
   url: string;
+  isMultiline: boolean;
 }
 
 export default class MessagesWebPart extends BaseClientSideWebPart<IMessagesWebPartProps> {
@@ -39,7 +40,8 @@ export default class MessagesWebPart extends BaseClientSideWebPart<IMessagesWebP
         headline: this.properties.headline,
         link: this.properties.link,
         hasLink: this.properties.hasLink,
-        url: this.properties.url
+        url: this.properties.url,
+        isMultiline: this.properties.isMultiline
       }
     );
 
@@ -79,9 +81,19 @@ export default class MessagesWebPart extends BaseClientSideWebPart<IMessagesWebP
                 PropertyPaneTextField('headline', {
                   label: 'Headline'
                 }),
+                PropertyPaneLabel('testLabel', {
+                  text: 'Test Label',
+                  required: true
+                }),
                 PropertyPaneTextField('text', {
-                  label: 'Message Text',
+                  // label: 'Message Text',
                   multiline: true
+                }),
+                PropertyPaneHorizontalRule(),
+                PropertyPaneToggle('isMultiline', {
+                  label: 'Multiline',
+                  onText: 'Yes',
+                  offText: 'No'
                 }),
                 PropertyPaneHorizontalRule(),
                 PropertyPaneToggle('hasLink', {

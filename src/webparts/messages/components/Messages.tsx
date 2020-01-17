@@ -15,14 +15,17 @@ export default class Messages extends React.Component<IMessagesProps, {}> {
         <div className={ styles.container }>
           <MessageBar
               messageBarType={MessageBarType[this.props.type]}
-              isMultiline={false}
+              isMultiline={this.props.isMultiline}
               dismissButtonAriaLabel="Close"
           >
-            <b>{ this.props.headline }</b> { this.props.text }
+            <b>{ this.props.headline }</b>
+            { this.props.text }
             { this.props.hasLink && 
-              <Link href={ this.props.url } target="_blank">
-                 { this.props.link }
-              </Link>
+              <>
+                <Link href={ this.props.url } target="_blank">
+                  { this.props.link }
+                </Link>
+              </>
             }
           </MessageBar>
         </div>
