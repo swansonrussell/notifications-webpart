@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
-import { 
+import {
   IPropertyPaneConfiguration,
   PropertyPaneTextField,
   PropertyPaneCheckbox,
@@ -12,7 +12,7 @@ import {
   PropertyPaneToggle,
   PropertyPaneDropdown,
   PropertyPaneHorizontalRule
- } from '@microsoft/sp-property-pane';
+} from '@microsoft/sp-property-pane';
 
 import * as strings from 'MessagesWebPartStrings';
 import Messages from './components/Messages';
@@ -27,6 +27,7 @@ export interface IMessagesWebPartProps {
   hasLink: boolean;
   url: string;
   isMultiline: boolean;
+  size: number;
 }
 
 export default class MessagesWebPart extends BaseClientSideWebPart<IMessagesWebPartProps> {
@@ -41,7 +42,8 @@ export default class MessagesWebPart extends BaseClientSideWebPart<IMessagesWebP
         link: this.properties.link,
         hasLink: this.properties.hasLink,
         url: this.properties.url,
-        isMultiline: this.properties.isMultiline
+        isMultiline: this.properties.isMultiline,
+        size: this.properties.size
       }
     );
 
@@ -81,19 +83,23 @@ export default class MessagesWebPart extends BaseClientSideWebPart<IMessagesWebP
                 PropertyPaneTextField('headline', {
                   label: 'Headline'
                 }),
-                PropertyPaneLabel('testLabel', {
-                  text: 'Test Label',
-                  required: true
-                }),
                 PropertyPaneTextField('text', {
-                  // label: 'Message Text',
-                  multiline: true
+                  label: 'Message Text',
+                  multiline: true,
+                  placeholder: "Enter Message here."
                 }),
                 PropertyPaneHorizontalRule(),
                 PropertyPaneToggle('isMultiline', {
                   label: 'Multiline',
                   onText: 'Yes',
                   offText: 'No'
+                }),
+                PropertyPaneSlider('size', {
+                  label: 'Text Size',
+                  value: 3,
+                  min: 0,
+                  max: 9,
+                  showValue: false
                 }),
                 PropertyPaneHorizontalRule(),
                 PropertyPaneToggle('hasLink', {

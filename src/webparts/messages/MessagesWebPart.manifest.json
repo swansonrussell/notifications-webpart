@@ -21,7 +21,7 @@
     "description": { "default": "Create messages and notifications!" },
     "officeFabricIconFontName": "Info",
     "properties": {
-      "description": "Message Bar"
+      "description": "SR Message Bar"
     }
   }]
 }
