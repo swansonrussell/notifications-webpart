@@ -40,16 +40,15 @@ export default class Messages extends React.Component<IMessagesProps, {}> {
             <Text
               variant={ Variants[this.props.size].name ? Variants[this.props.size].name : 'small'}
             >
-              Testing!
-            </Text>
-              <b>{ this.props.headline }</b> { this.props.text }
+              <strong>{ this.props.headline }</strong> { this.props.text }
               { this.props.hasLink && 
-                <>
+                <div>
                   <Link href={ this.props.url } target="_blank">
                     { this.props.link }
                   </Link>
-                </>
+                </div>
               }
+            </Text>
           </MessageBar>
           
         </div>
