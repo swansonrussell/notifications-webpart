@@ -10,7 +10,6 @@ interface ISetting<TType> {
 }
 
 const Variants: ISetting<keyof IFontStyles>[] = [
-  { name: 'tiny' },
   { name: 'xSmall' },
   { name: 'small' },
   { name: 'smallPlus' },
@@ -35,11 +34,11 @@ export default class Messages extends React.Component<IMessagesProps, {}> {
           <MessageBar
             messageBarType={MessageBarType[this.props.type]}
             isMultiline={this.props.isMultiline}
-            truncated={this.props.isMultiline ? false : true}
+            truncated={this.props.isTruncated}
             dismissButtonAriaLabel="Close"
           >
             <Text
-              variant={ Variants[this.props.size].name ? Variants[this.props.size].name : 'small'}
+              variant={ Variants[4].name }
             >
               <strong>{ this.props.headline }</strong> { this.props.text }
               { this.props.hasLink && 

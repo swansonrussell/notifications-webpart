@@ -6,5 +6,5 @@ export interface IMessagesProps {
   link: string;
   url: string;
   isMultiline: boolean;
-  size: number;
+  isTruncated: boolean;
 }

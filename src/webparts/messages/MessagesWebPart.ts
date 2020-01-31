@@ -27,7 +27,7 @@ export interface IMessagesWebPartProps {
   hasLink: boolean;
   url: string;
   isMultiline: boolean;
-  size: number;
+  isTruncated: boolean;
 }
 
 export default class MessagesWebPart extends BaseClientSideWebPart<IMessagesWebPartProps> {
@@ -43,7 +43,7 @@ export default class MessagesWebPart extends BaseClientSideWebPart<IMessagesWebP
         hasLink: this.properties.hasLink,
         url: this.properties.url,
         isMultiline: this.properties.isMultiline,
-        size: this.properties.size || 3,
+        isTruncated: this.properties.isTruncated,
       }
     );
 
@@ -92,14 +92,15 @@ export default class MessagesWebPart extends BaseClientSideWebPart<IMessagesWebP
                 PropertyPaneToggle('isMultiline', {
                   label: 'Multiline',
                   onText: 'Yes',
-                  offText: 'No'
+                  offText: 'No',
+                  checked: true,
                 }),
-                PropertyPaneSlider('size', {
-                  label: 'Text Size',
-                  value: 3,
-                  min: 0,
-                  max: 9,
-                  showValue: false
+                PropertyPaneToggle('isTruncated', {
+                  label: 'Collapsed',
+                  onText: 'Yes',
+                  offText: 'No',
+                  disabled: this.properties.isMultiline,
+                  checked: true,
                 }),
                 PropertyPaneHorizontalRule(),
                 PropertyPaneToggle('hasLink', {
