@@ -43,7 +43,7 @@ export default class MessagesWebPart extends BaseClientSideWebPart<IMessagesWebP
         hasLink: this.properties.hasLink,
         url: this.properties.url,
         isMultiline: this.properties.isMultiline,
-        size: this.properties.size
+        size: this.properties.size || 3,
       }
     );
 

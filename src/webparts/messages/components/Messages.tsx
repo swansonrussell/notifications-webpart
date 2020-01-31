@@ -35,6 +35,7 @@ export default class Messages extends React.Component<IMessagesProps, {}> {
           <MessageBar
             messageBarType={MessageBarType[this.props.type]}
             isMultiline={this.props.isMultiline}
+            truncated={this.props.isMultiline ? false : true}
             dismissButtonAriaLabel="Close"
           >
             <Text
