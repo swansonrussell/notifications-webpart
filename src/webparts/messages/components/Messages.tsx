@@ -2,7 +2,7 @@ import * as React from 'react';
 import styles from './Messages.module.scss';
 import { IMessagesProps } from './IMessagesProps';
 import { MessageBar, MessageBarType, Link } from 'office-ui-fabric-react';
-import { Text } from 'office-ui-fabric-react/lib/Text'
+import { Text } from 'office-ui-fabric-react/lib/Text';
 import { IFontStyles } from 'office-ui-fabric-react/lib/Styling';
 
 interface ISetting<TType> {
@@ -22,17 +22,19 @@ const Variants: ISetting<keyof IFontStyles>[] = [
 ];
 
 export default class Messages extends React.Component<IMessagesProps, {}> {
-  
+
   constructor(props) {
     super(props);
   }
 
   public render(): React.ReactElement<IMessagesProps> {
+
     return (
       <div className={ styles.messages }>
         <div className={ styles.container }>
           <MessageBar
-            messageBarType={MessageBarType[this.props.type]}
+            messageBarType={ MessageBarType[this.props.type] }
+            messageBarIconProps={ this.props.icon }
             isMultiline={this.props.isMultiline}
             truncated={this.props.isTruncated}
             dismissButtonAriaLabel="Close"

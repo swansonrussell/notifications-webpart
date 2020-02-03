@@ -17,11 +17,13 @@ import {
 import * as strings from 'MessagesWebPartStrings';
 import Messages from './components/Messages';
 import { IMessagesProps } from './components/IMessagesProps';
+import { IIconProps } from 'office-ui-fabric-react';
 
 export interface IMessagesWebPartProps {
   text: string;
   description: string;
   type: string;
+  icon: IIconProps;
   headline: string;
   link: string;
   hasLink: boolean;
@@ -38,11 +40,12 @@ export default class MessagesWebPart extends BaseClientSideWebPart<IMessagesWebP
       {
         text: this.properties.text,
         type: this.properties.type,
+        icon: { iconName: this.properties.icon },
         headline: this.properties.headline,
         link: this.properties.link,
         hasLink: this.properties.hasLink,
         url: this.properties.url,
-        isMultiline: this.properties.isMultiline,
+        isMultiline: !this.properties.isTruncated,
         isTruncated: this.properties.isTruncated,
       }
     );
@@ -75,9 +78,22 @@ export default class MessagesWebPart extends BaseClientSideWebPart<IMessagesWebP
                     { key: 'info', text: 'Info' },
                     { key: 'error', text: 'Error' },
                     { key: 'blocked', text: 'Blocked' },
+                    { key: 'warning', text: 'Warning' },
                     { key: 'severeWarning', text: 'Severe Warning' },
-                    { key: 'success', text: 'Success' },
-                    { key: 'warning', text: 'Warning' }
+                    { key: 'success', text: 'Success' }
+                  ]
+                }),
+                PropertyPaneDropdown('icon', {
+                  label: 'Icon Override',
+                  options: [
+                    { key: 'Info', text: 'Info' },
+                    { key: 'ErrorBadge', text: 'Error' },
+                    { key: 'Blocked2', text: 'Blocked' },
+                    { key: 'Warning', text: 'Warning' },
+                    { key: 'Completed', text: 'Success' },
+                    { key: 'Unknown', text: 'Question Mark' },
+                    { key: 'Emoji', text: 'Smile'},
+                    { key: 'World', text: 'Earth'}
                   ]
                 }),
                 PropertyPaneTextField('headline', {
@@ -89,18 +105,11 @@ export default class MessagesWebPart extends BaseClientSideWebPart<IMessagesWebP
                   placeholder: "Enter Message here."
                 }),
                 PropertyPaneHorizontalRule(),
-                PropertyPaneToggle('isMultiline', {
-                  label: 'Multiline',
-                  onText: 'Yes',
-                  offText: 'No',
-                  checked: true,
-                }),
                 PropertyPaneToggle('isTruncated', {
-                  label: 'Collapsed',
+                  label: 'Collapsible',
                   onText: 'Yes',
                   offText: 'No',
-                  disabled: this.properties.isMultiline,
-                  checked: true,
+                  checked: false,
                 }),
                 PropertyPaneHorizontalRule(),
                 PropertyPaneToggle('hasLink', {
