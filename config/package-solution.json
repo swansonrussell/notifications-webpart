@@ -3,7 +3,7 @@
   "solution": {
     "name": "notifications-webpart-client-side-solution",
     "id": "a8d1917a-e058-493e-bf01-f9ce8a37cd55",
-    "version": "2.0.0.1",
+    "version": "2.1.0.0",
     "includeClientSideAssets": false
   },
   "paths": {

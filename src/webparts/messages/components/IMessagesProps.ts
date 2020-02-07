@@ -8,6 +8,4 @@ export interface IMessagesProps {
   hasLink: boolean;
   link: string;
   url: string;
-  isMultiline: boolean;
-  isTruncated: boolean;
 }

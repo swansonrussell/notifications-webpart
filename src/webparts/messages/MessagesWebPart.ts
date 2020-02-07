@@ -28,8 +28,6 @@ export interface IMessagesWebPartProps {
   link: string;
   hasLink: boolean;
   url: string;
-  isMultiline: boolean;
-  isTruncated: boolean;
 }
 
 export default class MessagesWebPart extends BaseClientSideWebPart<IMessagesWebPartProps> {
@@ -45,8 +43,6 @@ export default class MessagesWebPart extends BaseClientSideWebPart<IMessagesWebP
         link: this.properties.link,
         hasLink: this.properties.hasLink,
         url: this.properties.url,
-        isMultiline: !this.properties.isTruncated,
-        isTruncated: this.properties.isTruncated,
       }
     );
 
@@ -76,8 +72,7 @@ export default class MessagesWebPart extends BaseClientSideWebPart<IMessagesWebP
                   label: 'Message Type',
                   options: [
                     { key: 'info', text: 'Info' },
-                    { key: 'error', text: 'Error' },
-                    { key: 'blocked', text: 'Blocked' },
+                    { key: 'error', text: 'Error/Blocked' },
                     { key: 'warning', text: 'Warning' },
                     { key: 'severeWarning', text: 'Severe Warning' },
                     { key: 'success', text: 'Success' }
@@ -103,13 +98,6 @@ export default class MessagesWebPart extends BaseClientSideWebPart<IMessagesWebP
                   label: 'Message Text',
                   multiline: true,
                   placeholder: "Enter Message here."
-                }),
-                PropertyPaneHorizontalRule(),
-                PropertyPaneToggle('isTruncated', {
-                  label: 'Collapsible',
-                  onText: 'Yes',
-                  offText: 'No',
-                  checked: false,
                 }),
                 PropertyPaneHorizontalRule(),
                 PropertyPaneToggle('hasLink', {
